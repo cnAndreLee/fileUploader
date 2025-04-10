@@ -5,22 +5,23 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	_ "path/filepath"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/jlaffaye/ftp"
 )
 
-func GetEnv(s string, defaultvar string) string {
-	v, exist := os.LookupEnv(s)
+func GetEnv(key string, defaultvar string) string {
+	v, exist := os.LookupEnv(key)
 	var res string
 
 	if !exist {
 		res = defaultvar
-		log.Println("loading default config---" + s + " : " + res)
+		log.Println("loading default config---" + key + " : " + res)
 	} else {
 		res = v
-		log.Println("loading   env   config---" + s + " : " + res)
+		log.Println("loading   env   config---" + key + " : " + res)
 	}
 
 	return res
@@ -76,6 +77,7 @@ func main() {
 			// 检查是否是新增文件的事件
 			if event.Op&fsnotify.Create == fsnotify.Create {
 				// 打开新文件
+				// 必须等待200毫秒，否则无法打开文件
 				time.Sleep(200 * time.Millisecond)
 				file, err := os.Open(event.Name)
 				if err != nil {

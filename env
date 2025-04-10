@@ -6,3 +6,4 @@ AFU_FTP_PASS=jyiot123
 # AFU_FTP_PATH=/gbiot/source/sw/61082107780/
 AFU_FTP_PATH=/home/
 AFU_SOURCE_FILE_PATH=/root/AndreFileUploader
+TESTV=2222 223
